@@ -16,5 +16,5 @@ body{
     padding: 15px 70px;
     border: 1px solid black;
     margin-right: 20px;
-    
+    cursor: pointer;
 }
