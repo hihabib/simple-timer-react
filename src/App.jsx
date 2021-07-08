@@ -38,6 +38,7 @@ class App extends Component {
                     }, ()=>{
                         if(this.state.count === 0 ){
                             clearInterval(this.state.intervalId);
+                            alert('Time Over');
                         }
                     });
                 }
