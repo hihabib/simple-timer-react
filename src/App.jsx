@@ -2,7 +2,8 @@ import React, {Component} from 'react'
 import './App.css'
 class App extends Component {
     state = {
-        count: 0
+        count: 0,
+        intervalId: null
     }
     handleIncrement = () => {
         this.setState((el)=>{
@@ -35,15 +36,32 @@ class App extends Component {
                             }
                         );
                     }, ()=>{
-                        if(this.state.count === 0){
-                            clearInterval(intervalId);
+                        if(this.state.count === 0 ){
+                            clearInterval(this.state.intervalId);
                         }
                     });
                 }
         }
-        const intervalId = setInterval(handleInterval, 1000);
+        
+        this.setState({intervalId: setInterval(handleInterval, 1000)});
+        
     }
-    
+    handlePause = () => {
+        if(this.state.intervalId){
+            clearInterval(this.state.intervalId)
+        }
+    }
+    handleReset = () => {
+        this.setState(()=>{
+            return(
+                {
+                    count: 0
+                }
+            );
+        }, ()=>{
+            clearInterval(this.state.intervalId);
+        });
+    }
     render(){
         return(
             <div className="app">
@@ -53,6 +71,8 @@ class App extends Component {
             <button onClick={this.handleDecrement} className="btn">-</button>
             <button  onClick={this.handleIncrement} className="btn">+</button><br/>
             <button onClick={this.handleStart} className="btn">Start</button>
+            <button onClick={this.handlePause} className="btn">Pause</button>
+            <button onClick={this.handleReset} className="btn">Reset</button>
             </div>
             </div>
         )
